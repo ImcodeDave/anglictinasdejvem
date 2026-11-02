@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#173e3a" />
+    <meta
+      name="description"
+      content="Angličtina pro skutečné situace. Pochop větu, procvič si ji a zkus mluvit po svém."
+    />
+    <title>Angličtina s Dejvem · Krok za krokem</title>
+    <link rel="icon" type="image/svg+xml" href="assets/pixel-aj.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="student.css" />
+    <script src="lessons.js" defer></script>
+    <script src="grammar.js" defer></script>
+    <script src="learning.js" defer></script>
+    <script src="student-content.js" defer></script>
+    <script src="teacher-views.js" defer></script>
+    <script src="student-app.js" defer></script>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Angličtina s Dejvem"
+        ><span class="brand-mark"
+          ><img src="assets/pixel-aj.svg" alt="AJ" width="44" height="44" /></span
+        ><span>Angličtina<br /><b>s Dejvem</b></span></a
+      >
+      <div class="side-label">TVŮJ PROSTOR PRO ANGLIČTINU</div>
+      <nav aria-label="Hlavní navigace">
+        <button data-nav="overview" class="nav active"><span>▦</span> Moje témata</button>
+        <button data-nav="practice" class="nav"><span>↔</span> Procvičit věty</button>
+        <button data-nav="progress" class="nav"><span>◷</span> Můj pokrok</button>
+      </nav>
+      <div class="side-note">
+        <span class="small-star">✳</span>
+        <h3>Jedna věta dnes.<br />Malý rozhovor zítra.</h3>
+        <p>Nemusíš znát všechna slova. Začni tím, co chceš říct o sobě.</p>
+      </div>
+      <div class="side-bottom">
+        <span class="status-dot"></span> Vlastním tempem
+        <small>Tvůj pokrok zůstává v tomto prohlížeči.</small>
+      </div>
+    </aside>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="breadcrumb">
+          Angličtina s Dejvem <span>/</span> <strong id="crumb">Moje témata</strong>
+        </div>
+        <div class="profile">
+          <span class="avatar">S</span><label class="sr-only" for="student">Profil studentky</label
+          ><select id="student">
+            <option value="one">Studentka 1</option>
+            <option value="two">Studentka 2</option></select
+          ><button id="rename" class="icon-button" title="Upravit jméno" aria-label="Upravit jméno">
+            ✎</button
+          ><button
+            id="teacher-access"
+            class="teacher-access"
+            title="Pro lektora"
+            aria-label="Pro lektora"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              shape-rendering="crispEdges"
+              aria-hidden="true"
+            >
+              <g fill="currentColor">
+                <path d="M10 2h4v1h3v1h3v1h3v2h-3v1h-3v1h-3v1h-4V9H7V8H4V7H1V5h3V4h3V3h3z" />
+                <path d="M6 10h3v1h6v-1h3v6h-3v1H9v-1H6z" />
+                <path d="M21 8h1v8h1v3h-3v-3h1z" />
+              </g>
+            </svg>
+          </button>
+        </div>
+      </header>
+      <main id="main"></main>
+      <footer>Malé kroky. Skutečné rozhovory.<span>Angličtina s Dejvem</span></footer>
+    </div>
+    <div id="toast" role="status" class="toast"></div>
+    <dialog id="name-dialog">
+      <form method="dialog">
+        <h2>Jak se studentka jmenuje?</h2>
+        <label for="student-name">Jméno nebo přezdívka</label
+        ><input id="student-name" maxlength="35" required autocomplete="off" />
+        <p class="muted">Uloží se pouze v tomto prohlížeči.</p>
+        <div class="actions">
+          <button value="cancel" class="button secondary" formnovalidate>Zrušit</button
+          ><button id="save-name" value="save" class="button primary">Uložit</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
