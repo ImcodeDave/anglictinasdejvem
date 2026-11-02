@@ -161,6 +161,7 @@ function renderResults() {
           </div>`
         : '<p class="muted">Zatím tu nejsou věty s chybnou odpovědí ani použitou nápovědou. Výsledky se objeví po procvičování.</p>'}
     </section>
+    ${renderTeacherExtraProgress()}
     <aside class="teaching-tip">
       <span>✎</span>
       <div>

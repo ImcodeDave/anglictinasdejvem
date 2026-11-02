@@ -12,10 +12,14 @@
     <link rel="icon" type="image/svg+xml" href="assets/pixel-aj.svg" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="student.css" />
+    <link rel="stylesheet" href="practice.css" />
     <script src="lessons.js" defer></script>
     <script src="grammar.js" defer></script>
     <script src="learning.js" defer></script>
     <script src="student-content.js" defer></script>
+    <script src="practice-content.js" defer></script>
+    <script src="practice-model.js" defer></script>
+    <script src="practice-views.js" defer></script>
     <script src="teacher-views.js" defer></script>
     <script src="student-app.js" defer></script>
   </head>
@@ -29,7 +33,26 @@
       <div class="side-label">TVŮJ PROSTOR PRO ANGLIČTINU</div>
       <nav aria-label="Hlavní navigace">
         <button data-nav="overview" class="nav active"><span>▦</span> Moje témata</button>
-        <button data-nav="practice" class="nav"><span>↔</span> Procvičit věty</button>
+        <details class="nav-group" id="practice-menu" open>
+          <summary>
+            <span aria-hidden="true">✦</span> Co chci procvičit
+            <span class="menu-chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="nav-submenu">
+            <button data-nav="vocabulary" class="nav nav-subitem">
+              <span aria-hidden="true">▤</span> Slovíčka
+            </button>
+            <button data-nav="practice" class="nav nav-subitem">
+              <span aria-hidden="true">↔</span> Věty
+            </button>
+            <button data-nav="tenses" class="nav nav-subitem">
+              <span aria-hidden="true">◷</span> Časy
+            </button>
+            <button data-nav="media" class="nav nav-subitem">
+              <span aria-hidden="true">▣</span> Filmy a seriály
+            </button>
+          </div>
+        </details>
         <button data-nav="progress" class="nav"><span>◷</span> Můj pokrok</button>
       </nav>
       <div class="side-note">

@@ -108,6 +108,27 @@ function openLesson(id, tab = 'learn') {
 function readRoute() {
   const [section, item, detail] = location.hash.slice(1).split('/');
 
+  if (section === 'slovicka') {
+    route = {
+      page: 'vocabulary',
+      id: vocabularyCategories.some((category) => category.id === item) ? item : 'home',
+    };
+    return;
+  }
+
+  if (section === 'casy') {
+    const selected = tenseTopics.find((topic) => topic.id === item) || tenseTopics[0];
+    if (practiceUi.tenseGroup !== 'all' && practiceUi.tenseGroup !== selected.group)
+      practiceUi.tenseGroup = selected.group;
+    route = { page: 'tenses', id: selected.id };
+    return;
+  }
+
+  if (section === 'filmy') {
+    route = { page: 'media' };
+    return;
+  }
+
   if (section === 'lektor') {
     const teacherTabs = ['vysledky', 'gramatika', 'tvary', 'priprava'];
     route = {
@@ -165,6 +186,9 @@ function renderShell() {
   document.body.classList.toggle('teacher-mode', teacher);
   query('#teacher-access').setAttribute('aria-pressed', String(teacher));
   query('#teacher-access').title = teacher ? 'Zpět ke studiu' : 'Pro lektora';
+  const isPracticePage = ['vocabulary', 'practice', 'tenses', 'media'].includes(route.page);
+  query('#practice-menu').classList.toggle('is-active', isPracticePage);
+  if (isPracticePage) query('#practice-menu').open = true;
   document
     .querySelectorAll('[data-nav]')
     .forEach((b) =>
@@ -180,6 +204,9 @@ function renderShell() {
         progress: 'Můj pokrok',
         practice: 'Procvičit věty',
         lesson: getCurrentLesson().title,
+        vocabulary: 'Slovíčka',
+        tenses: 'Časy',
+        media: 'Filmy a seriály',
       }[route.page];
 }
 
@@ -191,6 +218,9 @@ function renderPage() {
     practice: renderPractice,
     progress: renderProgress,
     teacher: renderTeacherPage,
+    vocabulary: renderVocabulary,
+    tenses: renderTenses,
+    media: renderMedia,
   })[route.page]();
 }
 
@@ -677,6 +707,7 @@ function renderProgress() {
         )
         .join('')}
     </div>
+    ${renderExtraProgressSummary()}
     <aside class="teaching-tip">
       <span>♡</span>
       <div>
@@ -722,7 +753,16 @@ async function copyText(text) {
 }
 // Obsluha navigace, profilů a spuštění aplikace.
 bindClicks('[data-nav]', (b) =>
-  navigateTo({ overview: '#', practice: '#cviceni/hello', progress: '#pokrok' }[b.dataset.nav]),
+  navigateTo(
+    {
+      overview: '#',
+      practice: '#cviceni/hello',
+      progress: '#pokrok',
+      vocabulary: '#slovicka/home',
+      tenses: '#casy/present-simple',
+      media: '#filmy',
+    }[b.dataset.nav],
+  ),
 );
 query('.brand').onclick = (e) => {
   e.preventDefault();
@@ -735,6 +775,8 @@ query('#student').onchange = (e) => {
   savedState.selected = activeStudentId;
   saveProgress();
   exerciseKey = '';
+  practiceUi.flippedWords.clear();
+  practiceUi.retryQuestions.clear();
   renderPage();
 };
 query('#rename').onclick = () => {
